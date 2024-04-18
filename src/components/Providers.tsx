@@ -7,11 +7,9 @@ interface Props{
 
 function Providers({children}:Props) {
   return (
-    <div>
         <SessionProvider>
            {children}
         </SessionProvider>
-    </div>
   )
 }
 

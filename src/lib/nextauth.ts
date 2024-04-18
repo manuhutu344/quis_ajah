@@ -21,6 +21,7 @@ export const authOptions: NextAuthOptions ={
     session:{
         strategy: "jwt"
     },
+    secret: process.env.NextAUTH_SECRET,
     callbacks:{
         jwt: async ({token}) =>{
             const db_user = await prisma.user.findFirst({
@@ -43,7 +44,6 @@ export const authOptions: NextAuthOptions ={
             return session
         }
     },
-    secret: process.env.NextAUTH_SECRET,
     adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({

@@ -2,6 +2,7 @@ import { getAuthSession } from '@/lib/nextauth'
 import Link from 'next/link'
 import React from 'react'
 import SignInBottom from './SignInBottom'
+import UserAccountNav from './UserAccountNav'
 
 async function Navbar() {
     const session = await getAuthSession()
@@ -13,9 +14,9 @@ async function Navbar() {
                     Quis Saja
                 </p>
                 </Link>
-                <div className="flex items-center">
+                <div className="flex items-center text-white">
                     {session?.user ?(
-                        <h1 className="text-white">Selamat Datang {session.user.name}</h1>
+                        <UserAccountNav user={session.user} />
                     ):(
                         <SignInBottom text='Masuk Ke Akun' />
                     )}

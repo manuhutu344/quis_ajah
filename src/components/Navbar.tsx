@@ -15,13 +15,15 @@ async function Navbar() {
                     Quis Saja
                 </p>
                 </Link>
-                <ThemeToggle />
-                <div className="flex items-center text-white">
+                <div className="flex items-center">
+                <ThemeToggle className='mr-3' />
+                <div className="flex items-center">
                     {session?.user ?(
                         <UserAccountNav user={session.user} />
                     ):(
                         <SignInBottom text='Masuk Ke Akun' />
                     )}
+                </div>
                 </div>
             </div>
         </div>

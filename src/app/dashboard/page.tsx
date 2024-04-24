@@ -3,6 +3,7 @@ import QuisMeCard from '@/components/dashboard/QuisMeCard'
 import { getAuthSession } from '@/lib/nextauth'
 import { redirect } from 'next/navigation'
 import React from 'react'
+import HotTopicsCard from './HotTopicsCard'
 
 export const metadata={
   title: "Dashboard | Quis Saja"
@@ -23,7 +24,7 @@ async function page() {
           <HistoryCard />
       </div>
       <div className="grid gap-4 mt-4 md:grid-cols-2 lg:grid-cols-7">
-
+          <HotTopicsCard />
       </div>
     </main>
   )

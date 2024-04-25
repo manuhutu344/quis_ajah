@@ -1,23 +1,22 @@
-import CustomWordCloud from '@/components/CustomWordCloud'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import React from 'react'
 
-function HotTopicsCard() {
+function RecentActivities() {
   return (
-    <Card className="col-span-4">
+    <Card className="col-span-4 lg:col-span-3">
         <CardHeader>
             <CardTitle className="text-2xl font-bold">
-                Topik Panas
+                Aktivitas Terbaru
             </CardTitle>
             <CardDescription>
-                Pencet Sebuah Topik Untuk Memulai quis
+                Anda telah memainkan total 7 permainan
             </CardDescription>
         </CardHeader>
-        <CardContent className="pl-2">
-            <CustomWordCloud />
+        <CardContent className="max-h-[580px] overflow-scroll">
+                History
         </CardContent>
     </Card>
   )
 }
 
-export default HotTopicsCard
+export default RecentActivities

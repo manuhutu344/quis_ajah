@@ -16,6 +16,8 @@ import {
   } from "@/components/ui/form"
 import { Button } from './ui/button'
 import { Input } from './ui/input'
+import { BookOpen, CopyCheck } from 'lucide-react'
+import { Separator } from './ui/separator'
 
 type Input = z.infer<typeof quizCreationSchema>
 
@@ -31,6 +33,7 @@ function QuisCreation() {
     function onSubmit(input: Input){
         alert(JSON.stringify(input, null, 2))
     }
+    form.watch()
   return (
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         <Card>
@@ -76,6 +79,19 @@ function QuisCreation() {
                 </FormItem>
             )}
         />
+        <div className="flex justify-between">
+            <Button type="button" onClick={()=>{
+                form.setValue('type', 'mcq')
+            }} variant={form.getValues('type') === 'mcq' ? 'default':'secondary'} className="w-1/2 rounded-none rounded-l-lg">
+                <CopyCheck className="w-4 h-4 mr-2" /> Pilihan Ganda
+            </Button>
+            <Separator orientation="vertical" />
+            <Button type="button" onClick={()=>{
+                form.setValue('type', 'open_ended')
+            }} variant={form.getValues('type') === 'open_ended' ? 'default':'secondary'} className="w-1/2 rounded-none rounded-r-lg">
+            <BookOpen className="w-4 h-4 mr-2" /> Berakhir
+            </Button>
+        </div>
         <Button type="submit">Buat Topik</Button>
       </form>
     </Form>

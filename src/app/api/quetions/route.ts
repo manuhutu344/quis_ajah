@@ -6,7 +6,7 @@ import { getAuthSession } from "@/lib/nextauth";
 
 export async function POST(req: Request, res: Response){
     try {
-        const session = await getAuthSession()
+        //const session = await getAuthSession()
         // if(!session?.user){
         //     return NextResponse.json(
         //         {

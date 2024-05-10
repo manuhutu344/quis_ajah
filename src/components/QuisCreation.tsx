@@ -44,7 +44,7 @@ function QuisCreation() {
             type: "open_ended"
         }
     })
-    function onSubmit(input: Input){
+    async function onSubmit(input: Input){
         getQuestions({
             amount: input.amount,
             topic: input.topic,

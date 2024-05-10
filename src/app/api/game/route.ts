@@ -20,31 +20,31 @@ export async function POST(req: Request, res: Response){
                 gameType: type,
                 timeStarted: new Date(),
                 userId: session.user.id,
-                topic
-            }
+                topic,
+            },
         })
-        const {data} = await axios.post(`${process.env.API_URL}/api/quetions`,{
+        const {data} = await axios.post(`${process.env.API_URL as string}/api/quetions`,{
             amount,
             topic,
             type
         })
         if(type === "mcq"){
             type mcqQuestion = {
-                question: string,
-                answer: string,
-                option1: string,
-                option2: string,
+                question: string
+                answer: string
+                option1: string
+                option2: string
                 option3: string
             }
-            let manyData = data.questions.map((question: mcqQuestion)=>{
-                let options = [question.answer, question.option1, question.option2, question.option3]
+            const manyData = data.questions.map((question: mcqQuestion)=>{
+                let options = [question.option1, question.option2, question.option3, question.answer]
                 options = options.sort(()=>Math.random() - 0.5)
                 return {
                     question: question.question,
                     answer: question.answer,
                     options: JSON.stringify(options),
                     gameId: game.id,
-                    quetionType: "mcq"
+                    quetionType: "mcq",
                 }
             })
             await prisma.question.createMany({
@@ -52,7 +52,7 @@ export async function POST(req: Request, res: Response){
             })
         }else if(type === "open_ended"){
             type openQuestion = {
-                question: string,
+                question: string
                 answer: string
             }
             let manyData = data.questions.map((question: openQuestion)=>{
@@ -60,7 +60,7 @@ export async function POST(req: Request, res: Response){
                     question: question.question,
                     answer: question.answer,
                     gameId: game.id,
-                    questionType: "open_ended"
+                    questionType: "open_ended",
                 }
             })
             await prisma.question.createMany({

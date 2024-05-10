@@ -28,7 +28,7 @@ function QuisCreation() {
     const router = useRouter()
     const {mutate: getQuestions, isPending} = useMutation({
         mutationFn: async ({amount, topic, type}: Input) =>{
-            const response = await axios.post('/api/game', {
+            const response = await axios.post("/api/game", {
                 amount,
                 topic,
                 type
@@ -118,7 +118,7 @@ function QuisCreation() {
             <BookOpen className="w-4 h-4 mr-2" /> Berakhir
             </Button>
         </div>
-        <Button type="submit">Buat Topik</Button>
+        <Button disabled={isPending} type="submit">Buat Topik</Button>
       </form>
     </Form>
             </CardContent>

@@ -1,3 +1,4 @@
+import MCQ from '@/components/mcq'
 import { prisma } from '@/lib/db'
 import { getAuthSession } from '@/lib/nextauth'
 import { redirect } from 'next/navigation'
@@ -19,13 +20,20 @@ async function page({params: {gameId}}:Props) {
             id: gameId
         },
         include: {
-            questions: true
+            questions: {
+                select: {
+                    id: true,
+                    question: true,
+                    options: true
+                }
+            }
         }
     })
+    if(!game || game.gameType !== 'mcq'){
+        return redirect('/quis')
+    }
   return (
-    <div>
-        {JSON.stringify(game, null, 2)}
-    </div>
+    <MCQ game={game} />
   )
 }
 

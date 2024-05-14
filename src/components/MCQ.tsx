@@ -1,3 +1,5 @@
+"use client"
+
 import { Game, Question } from '@prisma/client'
 import { Timer } from 'lucide-react'
 import React from 'react'
@@ -8,6 +10,21 @@ interface Props{
 }
 
 function MCQ({game}:Props) {
+    const [questionIndex, setQuestionIndex] = React.useState(0)
+
+    const currentQuestion = React.useMemo(()=>{
+        return game.questions[questionIndex]
+    }, [questionIndex, game.questions])
+
+    const options = React.useMemo(()=>{
+        if(!currentQuestion){
+            return []
+        }
+        if(!currentQuestion.options){
+            return []
+        }
+        return JSON.parse(currentQuestion.options as string) as string []
+    }, [currentQuestion])
   return (
     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 md:w-[80vw] max-w-4xl w-[90vw]">
         <div className="flex flex-row justify-between">
@@ -29,17 +46,20 @@ function MCQ({game}:Props) {
             <CardHeader className="flex flex-row items-center">
                 <CardTitle className="mr-5 text-center divide-y divide-zinc-800/80">
                     <div>
-                        1
+                        {questionIndex + 1}
                     </div>
                     <div className="text-base text-slate-400">
                         {game.questions.length}
                     </div>
                 </CardTitle>
                 <CardDescription className="flex-grow text-lg">
-                    Apa Itu Apa
+                   {currentQuestion.question}
                 </CardDescription>
             </CardHeader>
         </Card>
+        <div className="flex flex-col items-center justify-center mt-4">
+
+        </div>
     </div>
   )
 }
